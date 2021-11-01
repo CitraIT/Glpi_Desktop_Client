@@ -1,0 +1,10 @@
+﻿<Window x:Class="WpfApplication1.MainSupportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Suporte Tecnologia da Informação" Height="300" Width="300">
+    <Grid>
+        <Button Content="Novo Chamado" Height="23" HorizontalAlignment="Left" Margin="79,125,0,0" Name="btnNewTicket" VerticalAlignment="Top" Width="114" Click="btnNewTicket_Click" />
+        <Button Content="Meus Chamados" Height="23" HorizontalAlignment="Left" Margin="79,163,0,0" Name="btnMyTickets" VerticalAlignment="Top" Width="114" />
+        <Image Height="96" HorizontalAlignment="Left" IsHitTestVisible="True" Margin="11,0,0,0" Name="image1" Opacity="1" OverridesDefaultStyle="False" Source="/GLPI_Client;component/Images/logo-naturederme-2.png" Stretch="Fill" StretchDirection="Both" UseLayoutRounding="False" VerticalAlignment="Top" Width="255" />
+    </Grid>
+</Window>
