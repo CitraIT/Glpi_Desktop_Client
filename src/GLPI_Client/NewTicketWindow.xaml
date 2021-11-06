@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfApplication1.NewTicketWindow"
+﻿<Window x:Class="GLPI_Client.NewTicketWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Abrir novo chamado" Height="381" Width="355">
@@ -8,8 +8,8 @@
         <Label Content="Detalhes" Height="28" HorizontalAlignment="Left" Margin="8,122,0,0" Name="label3" VerticalAlignment="Top" Width="57" />
         <Label Content="Categoria" Height="28" HorizontalAlignment="Left" Margin="8,46,0,0" Name="label4" VerticalAlignment="Top" Width="62" />
         <ComboBox Height="23" HorizontalAlignment="Left" Margin="73,48,0,0" Name="cmbItilCategories" VerticalAlignment="Top" Width="248" />
-        <Button Content="Enviar" Height="23" HorizontalAlignment="Left" Margin="128,253,0,0" Name="button1" VerticalAlignment="Top" Width="75" />
-        <TextBox Height="23" Margin="73,88,0,0" Name="textBox2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="248" />
-        <RichTextBox Height="100" HorizontalAlignment="Left" Margin="12,147,0,0" Name="richTextBox1" VerticalAlignment="Top" Width="309" />
+        <Button Content="Enviar" Height="23" HorizontalAlignment="Left" Margin="128,253,0,0" Name="btnNewTicket" VerticalAlignment="Top" Width="75" Click="btnNewTicket_Click" />
+        <TextBox Height="23" Margin="73,88,0,0" Name="txtTitle" VerticalAlignment="Top" HorizontalAlignment="Left" Width="248" Text="" />
+        <RichTextBox Height="100" HorizontalAlignment="Left" Margin="12,147,0,0" Name="txtDetails" VerticalAlignment="Top" Width="309" />
     </Grid>
 </Window>

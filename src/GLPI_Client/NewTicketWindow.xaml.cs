@@ -11,14 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WpfApplication1
+namespace GLPI_Client
 {
 
-    public class ItilCategoryItem
-    {
-        public int id { get; set; }
-        public string text { get; set; }
-    }
 
     /// <summary>
     /// Interaction logic for NewTicketWindow.xaml
@@ -51,5 +46,35 @@ namespace WpfApplication1
 
             
         }
+
+
+
+        private void btnNewTicket_Click(object sender, RoutedEventArgs e)
+        {
+            // Button btnNewTicket = (Button) sender;
+            TextBox txtTitle = (TextBox) this.FindName("txtTitle");
+            RichTextBox txtDetails = (RichTextBox) this.FindName("txtDetails");
+            string details = new TextRange(txtDetails.Document.ContentStart, txtDetails.Document.ContentEnd).Text;
+            ComboBox itilCategories = (ComboBox)this.FindName("cmbItilCategories");
+            // System.Windows.MessageBox.Show(itilCategories.ToString());
+            int itilCategoriesId = int.Parse( itilCategories.SelectedValue.ToString() );
+            int ticketId = this.glpi.createNewTicket(txtTitle.Text, details, itilCategoriesId);
+            if (ticketId == 0)
+            {
+                System.Windows.MessageBox.Show("Erro ao cadastrar chamado!");
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Chamado registrado!\nNúmero: " + ticketId.ToString());
+                this.Close();
+            }
+        }
+    }
+
+
+    public class ItilCategoryItem
+    {
+        public int id { get; set; }
+        public string text { get; set; }
     }
 }

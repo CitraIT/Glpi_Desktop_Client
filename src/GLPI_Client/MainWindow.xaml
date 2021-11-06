@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfApplication1.MainWindow"
+﻿<Window x:Class="GLPI_Client.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Suporte Nature Derme - Tecnologia da Informação" Height="350" Width="525">

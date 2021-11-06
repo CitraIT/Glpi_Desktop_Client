@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using System.Management;
 
 
-namespace WpfApplication1
+namespace GLPI_Client
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
