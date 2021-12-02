@@ -1,0 +1,453 @@
+GLPI - FLOW DE LOGIN COM CAPTURA DE TRAFEGO WEB
+
+1 CENÁRIO - USUÁRIO COMUM
+
+
+
+1.1 Obter a página inicial do GLPI
+
+[REQUEST]
+GET / HTTP/1.1
+Host: suporte.citrait.com.br
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Te: trailers
+Connection: close
+
+
+[RESPONSE]
+HTTP/1.1 200 OK
+Date: Thu, 02 Dec 2021 00:53:45 GMT
+Server: Apache/2.4.6 () OpenSSL/1.0.2k-fips PHP/7.4.24
+X-Powered-By: PHP/7.4.24
+Set-Cookie: glpi_3f946f74140a3178722cb675d5bf6b47=4ac5e091d8fa90ae075c4e27f164b421; path=/; HttpOnly
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Connection: close
+Content-Type: text/html; charset=UTF-8
+Content-Length: 16682
+
+...
+<div id="userNameArea">
+	<input id="userNameInput" name="fielda61a81919f0c2a" type="email" value="" tabindex="1" class="text fullWidth"
+		spellcheck="false" placeholder="nome@example.com" autocomplete="off"/>
+</div>
+
+<div id="passwordArea">
+	 <input id="passwordInput" name="fieldb61a81919f0c2c" type="password" tabindex="2" class="text fullWidth"
+		placeholder="Senha" autocomplete="off"/>
+</div>
+<input type="hidden" name="_glpi_csrf_token" value="e8d051982244eee5e45eade33981ee639dbad935484e439803f1ec7e3a003f39" />
+...
+
+
+
+
+1.2 Submeter o formulario de Login
+
+[REQUEST]
+POST /front/login.php HTTP/1.1
+Host: suporte.citrait.com.br
+Cookie: glpi_3f946f74140a3178722cb675d5bf6b47=4ac5e091d8fa90ae075c4e27f164b421
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 169
+Origin: https://suporte.citrait.com.br
+Referer: https://suporte.citrait.com.br/
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: same-origin
+Sec-Fetch-User: ?1
+Te: trailers
+Connection: close
+
+fielda61a81919f0c2a=teste01&fieldb61a81919f0c2c=P4ssword&AuthMethod=FormsAuthentication&_glpi_csrf_token=e8d051982244eee5e45eade33981ee639dbad935484e439803f1ec7e3a003f39
+
+[RESPONSE]
+HTTP/1.1 302 Found
+Date: Thu, 02 Dec 2021 00:54:09 GMT
+Server: Apache/2.4.6 () OpenSSL/1.0.2k-fips PHP/7.4.24
+X-Powered-By: PHP/7.4.24
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Set-Cookie: glpi_3f946f74140a3178722cb675d5bf6b47=46f7024e4e2e51ab215186e09ed436b5; path=/; HttpOnly
+Location: /front/helpdesk.public.php
+Content-Length: 0
+Connection: close
+Content-Type: text/html; charset=UTF-8
+
+
+
+1.3 Obter a página inicial (dashboard do usuario)
+
+[REQUEST]
+GET /front/helpdesk.public.php HTTP/1.1
+Host: suporte.citrait.com.br
+Cookie: glpi_3f946f74140a3178722cb675d5bf6b47=46f7024e4e2e51ab215186e09ed436b5
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Referer: https://suporte.citrait.com.br/
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: same-origin
+Sec-Fetch-User: ?1
+Te: trailers
+Connection: close
+
+[RESPONSE]
+HTTP/1.1 200 OK
+Date: Thu, 02 Dec 2021 00:54:15 GMT
+Server: Apache/2.4.6 () OpenSSL/1.0.2k-fips PHP/7.4.24
+X-Powered-By: PHP/7.4.24
+Expires: Mon, 26 Jul 1997 05:00:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+x-frame-options: SAMEORIGIN
+Connection: close
+Content-Type: text/html; charset=UTF-8
+Content-Length: 41293
+
+...
+<meta property="glpi:csrf_token" content="d5356604a46daa877f8a47f8e8776e082fe5b529dfca5e6ae9397ad33857571f" />
+
+
+
+
+1.4 Obter a página de formulário de novo chamado
+
+[REQUEST]
+GET /front/helpdesk.public.php?create_ticket=1 HTTP/1.1
+Host: suporte.citrait.com.br
+Cookie: glpi_3f946f74140a3178722cb675d5bf6b47=46f7024e4e2e51ab215186e09ed436b5
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Referer: https://suporte.citrait.com.br/front/helpdesk.public.php
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: same-origin
+Sec-Fetch-User: ?1
+Te: trailers
+Connection: close
+
+[RESPONSE]
+HTTP/1.1 200 OK
+Date: Thu, 02 Dec 2021 00:55:52 GMT
+Server: Apache/2.4.6 () OpenSSL/1.0.2k-fips PHP/7.4.24
+X-Powered-By: PHP/7.4.24
+Expires: Mon, 26 Jul 1997 05:00:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+x-frame-options: SAMEORIGIN
+Connection: close
+Content-Type: text/html; charset=UTF-8
+Content-Length: 78560
+...
+<meta property="glpi:csrf_token" content="073c9afc80ab12bfbdbbeb2146261d96357b79c57698132c3608ab44f64a3af3" />
+_idor_token: "bb4568771817c9042ac890ad4a1b2527bc34648992fe91a4e475e6d6d407faf4",
+...
+<input type="hidden" name="_glpi_csrf_token" value="ddfcdeb7f60b086007c143c716f33f9f2c87c48d6c704d187612749fe29c2689" />
+...
+condition: "e259600b28bd099a0ffcd398a04dd24514e08a9d",
+...
+
+
+
+
+1.5 Obter via XMLHttpRequest a lista de Categorias de Chamados (ITILCategories)
+
+[REQUEST]
+POST /ajax/getDropdownValue.php HTTP/1.1
+Host: suporte.citrait.com.br
+Cookie: glpi_3f946f74140a3178722cb675d5bf6b47=46f7024e4e2e51ab215186e09ed436b5
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0
+Accept: application/json, text/javascript, */*; q=0.01
+Accept-Language: pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+X-Glpi-Csrf-Token: 073c9afc80ab12bfbdbbeb2146261d96357b79c57698132c3608ab44f64a3af3
+X-Requested-With: XMLHttpRequest
+Content-Length: 263
+Origin: https://suporte.citrait.com.br
+Referer: https://suporte.citrait.com.br/front/helpdesk.public.php?create_ticket=1
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-origin
+Te: trailers
+Connection: close
+
+itemtype=ITILCategory&display_emptychoice=1&emptylabel=-----&condition=e259600b28bd099a0ffcd398a04dd24514e08a9d&entity_restrict=2&permit_select_parent=0&_idor_token=bb4568771817c9042ac890ad4a1b2527bc34648992fe91a4e475e6d6d407faf4&searchText=&page_limit=100&page=1
+
+[RESPONSE]
+{
+  "results": [
+    {
+      "id": 0,
+      "text": "-----"
+    },
+    {
+      "text": "CITRAIT > NATUREDERME",
+      "children": [
+        {
+          "id": 97,
+          "text": "00- TESTE",
+          "level": 1,
+          "title": "00- TESTE - ",
+          "selection_text": "00- TESTE"
+        },
+        {
+          "id": 1,
+          "text": "01- FÓRMULA CERTA",
+          "level": 1,
+          "title": "01- FÓRMULA CERTA - ",
+          "selection_text": "01- FÓRMULA CERTA"
+        },
+		__[...]__
+		,
+        {
+          "id": 87,
+          "text": "Retirar médico da carteira",
+          "level": 2,
+          "title": "13- REPRESENTANTES > Retirar médico da carteira - ",
+          "selection_text": "13- REPRESENTANTES > Retirar médico da carteira"
+        }
+      ]
+    }
+  ],
+  "count": 97
+}
+
+
+
+1.6 Submeter o formulário de novo chamado
+
+[REQUEST]
+POST /front/tracking.injector.php HTTP/1.1
+Host: suporte.citrait.com.br
+Cookie: glpi_3f946f74140a3178722cb675d5bf6b47=46f7024e4e2e51ab215186e09ed436b5
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Content-Type: multipart/form-data; boundary=---------------------------321848118040588882722359554055
+Content-Length: 3281
+Origin: https://suporte.citrait.com.br
+Referer: https://suporte.citrait.com.br/front/tracking.injector.php
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: same-origin
+Sec-Fetch-User: ?1
+Te: trailers
+Connection: close
+
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="_from_helpdesk"
+
+1
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="requesttypes_id"
+
+1
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="date"
+
+2021-12-01 22:00:57
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="impact"
+
+1
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="requesttypes_id"
+
+1
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="urgency"
+
+3
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="locations_id"
+
+0
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="entities_id"
+
+2
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="type"
+
+2
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="itilcategories_id"
+
+10
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="_users_id_requester_notif[use_notification][]"
+
+1
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="_users_id_requester_notif[alternative_email][]"
+
+
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="my_items"
+
+
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="items_id"
+
+0
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="_users_id_observer[]"
+
+0
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="_users_id_observer_notif[use_notification][]"
+
+1
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="_users_id_observer_notif[alternative_email][]"
+
+
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="name"
+
+trocar minha senha fcerta
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="content"
+
+<p>minha senha expirou, trocar por gentileza.</p>
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="filename[]"; filename=""
+Content-Type: application/octet-stream
+
+
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="_tickettemplate"
+
+1
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="_predefined_fields"
+
+eyJfYWxsX3ByZWRlZmluZWRfb3ZlcnJpZGUiOjF9
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="add"
+
+Enviar mensagem
+-----------------------------321848118040588882722359554055
+Content-Disposition: form-data; name="_glpi_csrf_token"
+
+bebd71d70cfb74595041284b0f33519c89a18b558378f7b2cafe87508b75ed1e
+-----------------------------321848118040588882722359554055--
+
+
+[RESPONSE]
+HTTP/1.1 200 OK
+Date: Thu, 02 Dec 2021 01:02:00 GMT
+Server: Apache/2.4.6 () OpenSSL/1.0.2k-fips PHP/7.4.24
+X-Powered-By: PHP/7.4.24
+Expires: Mon, 26 Jul 1997 05:00:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+x-frame-options: SAMEORIGIN
+Connection: close
+Content-Type: text/html; charset=UTF-8
+Content-Length: 43578
+
+<!DOCTYPE html>
+...
+<meta property="glpi:csrf_token" content="e70c6474c1acf416ea838d4c4037047c792f618c2ce8c416a1982576c568ac25" />
+...
+<div id="message_after_redirect_0" title="Informa&ccedil;&atilde;o">Seu chamado foi registrado (Chamado: <a href='/front/ticket.form.php?id=113'>113</a>)<br/>Item adicionado com sucesso: <a  href='/front/ticket.form.php?id=113'  title="trocar minha senha fcerta">trocar minha senha fcerta</a><br/>Obrigado por utilizar o nosso sistema automático de helpdesk.</div>
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2 ACESSAR MEUS Chamados
+
+[REQUEST]
+GET /front/ticket.php HTTP/1.1
+Host: suporte.citrait.com.br
+Cookie: glpi_3f946f74140a3178722cb675d5bf6b47=46f7024e4e2e51ab215186e09ed436b5
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Referer: https://suporte.citrait.com.br/front/helpdesk.public.php
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: same-origin
+Sec-Fetch-User: ?1
+Te: trailers
+Connection: close
+
+
+[RESPONSE]
+HTTP/1.1 200 OK
+Date: Thu, 02 Dec 2021 01:51:13 GMT
+Server: Apache/2.4.6 () OpenSSL/1.0.2k-fips PHP/7.4.24
+X-Powered-By: PHP/7.4.24
+Expires: Mon, 26 Jul 1997 05:00:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+x-frame-options: SAMEORIGIN
+Connection: close
+Content-Type: text/html; charset=UTF-8
+Content-Length: 87110
+
+<!DOCTYPE html>
+...
+<meta property="glpi:csrf_token" content="827a627da1782e8fd7d60022f1eaa795ec9d205ccb38bb45c08892914c41f8da" />
+...
+<table border='0' class='tab_cadrehov'>
+<thead>
+...
+</thead>
+<tr  class='tab_bg_2' ><td  valign='top'>114</td>
+	<td  valign='top'>
+		<a id='Ticket114' href="/front/ticket.form.php?id=114">cadastrar novo cliente</a> 
+		<div id='contentTicket114' class='invisible'>
+			cadastrar o cliente abaixo<br />
+			Nome: CELIO BERNADINO RODRIGUES<br />
+			CPF: 110.88.3586-40
+		</div>
+<script type="text/javascript">
+//<![CDATA[
+
+$(function(){$('#Ticket114').qtip({
+         position: { viewport: $(window) },
+         content: {text: $('#contentTicket114')}, style: { classes: 'qtip-shadow qtip-bootstrap'}});});
+
+//]]>
+</script></td>
+<td  valign='top'><span class='no-wrap'><i class='itilstatus fas fa-circle new' title='Novo'></i>&nbsp;Novo</span></td>
+<td  valign='top'>teste01 </td>
+...
+</tr>
+...
+
+
+
+
+
